@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Route, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  
   title = 'communityPost';
+
 }

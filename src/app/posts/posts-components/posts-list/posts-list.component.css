@@ -1,0 +1,54 @@
+.outside-div {
+  display: grid;
+  grid-template-columns: 1fr 2fr ;
+  z-index: 0;
+  margin-top: 20px;
+}
+
+.filters-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.posts-div {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 70vh;
+  overflow-y:scroll;
+  overflow-x: hidden;
+}
+
+mat-card {
+  border: 2px solid grey;
+  margin-top: 3px;
+}
+
+form {
+  width: 100%;
+}
+
+.textarea {
+  width: 80%;
+}
+
+.icon-comments {
+  transform: scale(2);
+}
+
+form button {
+  margin-left: 10px;
+}
+
+.button-div {
+  z-index: 100;
+  position: sticky;
+  left: 50%;
+}
+
+.button-div button {
+  width: 50%;
+  position: relative;
+  top: 4px;
+}

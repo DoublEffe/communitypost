@@ -1,0 +1,17 @@
+<header>
+  <div>
+    <h1>LOGIN to COMMUNITYPOST</h1>
+    <p>The place where you can share ideas with your neighbours or other people from your community on how to improve your living place</p>
+  </div>
+</header>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Token</mat-label>
+    <input matInput placeholder="Ex. TpLghjf456#" type="password" name="token" required formControlName="token">
+  </mat-form-field>
+  <button mat-fab color="primary" type="submit" [disabled]="!loginForm.valid" >
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</form>
+

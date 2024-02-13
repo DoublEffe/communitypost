@@ -1,0 +1,33 @@
+.outside-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-div {
+  width: 50%;
+}
+
+mat-card {
+  border: 2px solid grey;
+  margin-top: 3px;
+}
+
+form {
+  width: 100%;
+}
+
+.textarea {
+  width: 80%;
+}
+
+form button {
+  margin-left: 10px;
+}
+
+.comments-div {
+  width: 50%;
+  border: 2px solid grey;
+  border-radius: 3px;
+  margin-top: 3px;
+}

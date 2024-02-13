@@ -1,0 +1,58 @@
+<div class="outside-div">
+  <div class="filters-div" >
+    <h2>Filters</h2>
+      <mat-form-field>
+        <mat-label>Filter by title</mat-label>
+        <input matInput placeholder="Ex. example title" (input)="onFilter($event)">
+      </mat-form-field>
+  </div>
+  <div class="posts-div">
+    <ng-template
+      *ngIf="postListFiltered === undefined; then bloccoIf; else bloccoElse">
+    </ng-template>
+      <ng-template #bloccoIf>
+        <mat-card *ngFor="let post of postsList; index as i">
+          <mat-card-header><strong>{{ post.title }}</strong></mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>{{ post.body }}</mat-card-content>
+          <mat-card-actions>
+            <button mat-flat-button routerLink="/posts/{{ post.id }}" matTooltip="Show the comments">
+              <mat-icon color="primary" class="icon-comments" >chat-bubble</mat-icon>
+            </button>
+            <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
+              <mat-form-field class="textarea">
+                <mat-label>Leave a comment</mat-label>
+                <textarea matInput placeholder="Share your idea..." formControlName="comments" required></textarea>
+              </mat-form-field>
+              <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
+            </form>
+          </mat-card-actions>  
+        </mat-card>
+      </ng-template>
+    <ng-template #bloccoElse>
+      <mat-card *ngFor="let post of postListFiltered">
+        <mat-card-header><strong>{{ post.title }}</strong></mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>{{ post.body }}</mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button routerLink="/posts/{{ post.id }}" matTooltip="Show the comments">
+            <mat-icon color="primary" class="icon-comments" >chat-bubble</mat-icon>
+          </button>
+          <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
+            <mat-form-field class="textarea">
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput placeholder="Share your idea..." formControlName="comments" required></textarea>
+            </mat-form-field>
+            <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
+          </form>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
+  </div>
+  <div class="button-div">
+    <button mat-fab extended color="primary" (click)="openDialog()" matTooltip="Add post">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+

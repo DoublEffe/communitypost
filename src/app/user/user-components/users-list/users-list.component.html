@@ -1,0 +1,60 @@
+<router-outlet></router-outlet>
+<div class="outside-div">
+  <div class="filters-div">
+    <h2>Filters</h2>
+    <mat-form-field>
+      <mat-label>Filter by name</mat-label>
+      <input matInput placeholder="Tanushri Mahajan" (input)="filterName($event)">
+      </mat-form-field>
+    <mat-accordion class="advanced-filters">
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Advanced Filters
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <mat-label>Filter by gender</mat-label>
+          <input matInput placeholder="Male/Female" (input)="filterGender($event)">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>show more users</mat-label>
+            <mat-select [(value)]="pageSelected" (selectionChange)="filterPage(pageSelected)">
+              @for (page of pageOption; track page) {
+                <mat-option [value]="page" >{{ page }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="users-div">
+      <ng-template *ngIf="usersFiltered === undefined; then bloccoIf; else bloccoElse"></ng-template>
+      <ng-template #bloccoIf>
+      <div mat-list-item *ngFor="let user of usersList" [ngClass]="user.status === 'active' ? 'a-active' : 'a-inactive'" >
+        <a  routerLink="/users/{{ user.id }}" matTooltip="Click for user detail">
+          {{ user.name }}
+        </a>
+        <button *ngIf="actualUserId !== 0 && actualUserId=== user.id" mat-mini-fab matTooltip="Delete user" color="primary" class="delete-button" type="button" (click)="onDelete(user.id, user.name)" >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </ng-template>
+      <ng-template #bloccoElse>
+        <div mat-list-item *ngFor="let user of usersFiltered" [ngClass]="user.status === 'active' ? 'a-active' : 'a-inactive'" >
+          <a  routerLink="/users/{{ user.id }}" matTooltip="Click for user detail">
+            {{ user.name }}
+          </a>
+          <button *ngIf="actualUserId !== 0 && actualUserId=== user.id" mat-mini-fab matTooltip="Delete user" color="primary" class="delete-button" type="button" (click)="onDelete(user.id, user.name)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+    </ng-template>
+  </div>
+  <div class="button-div" [ngClass]="addButtonVisible ? 'button-div-visible' : 'button-div-hidden'">
+    <button mat-fab extended matTooltip="Add user" color="primary" (click)="openDialog()" class="add-button">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+

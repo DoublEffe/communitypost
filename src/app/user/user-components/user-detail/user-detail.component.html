@@ -1,0 +1,29 @@
+<div class="outside-div">
+  <div *ngFor="let user of userInfo" class="user-info">
+    <img src="../../assets/blank-profile.png">
+    <p><strong>General Info:</strong></p>
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Gender:</strong> {{ user.gender }}</p>
+    <button *ngIf="actualUser === user.id" mat-flat-button color="primary" (click)="openDialog()">Update</button>
+  </div>
+  <div class="user-posts">
+    <mat-card *ngFor="let post of userPosts; index as i">
+      <mat-card-header><strong>{{ post.title }}</strong></mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>{{ post.body }}</mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button routerLink="/posts/{{ post.id }}" matTooltip="Show the comments">
+          <mat-icon color="primary" class="icon-comments" >chat-bubble</mat-icon>
+        </button>
+        <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
+          <mat-form-field class="textarea">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="Share your idea..." type="textarea" formControlName="comments" required></textarea>
+          </mat-form-field>
+          <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
+        </form>
+      </mat-card-actions>  
+    </mat-card>
+  </div>
+</div>

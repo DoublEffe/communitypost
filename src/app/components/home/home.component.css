@@ -1,0 +1,10 @@
+header {
+  display: flex;
+  justify-content: center;
+}
+
+header button {
+  position: absolute;
+  left: 80%;
+  margin-top: 5px;
+}
