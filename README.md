@@ -64,8 +64,8 @@ others can comment and in this way start a discussion on how your idea can be im
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [![Angular][Angular.io]][Angular-url]
-* [Angular Material][Angular-material]
+* [![Angular][Angular-url]][Angular.io]
+* [![Angular Material][Angular-material]][Angular-material.io]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -143,3 +143,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Angular.io]: https://angular.io/
 [Angular-url]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-material]: https://img.shields.io/badge/Angular%20Material-8A2BE2
+[Angular-material.io]: https://material.angular.io/
