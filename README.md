@@ -108,7 +108,7 @@ List things you need to use the software and how to install them.
 
 This is the login page of CommunityPost and here you can insert the token obtained from the site gorest.co.in 
 
-[Login screen shoot](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot-login.png)
+![Login screen shoot](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot-login.png)
 
 After the login the main page will show two section called COMMUNITY, where you can see all users add your and filter trough them, and POSTS, where you can see all the posts from others.
 
