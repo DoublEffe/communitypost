@@ -4,10 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
+ 
   <h3 align="center">COMMUNITYPOST</h3>
 
   <p align="center">
@@ -143,4 +140,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Angular.io]: https://angular.io/
 [Angular-url]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-material]: https://img.shields.io/badge/Angular%20Material-8A2BE2
+<<<<<<< HEAD
 [Angular-material.io]: https://material.angular.io/
+=======
+>>>>>>> 4b9b964ea2866e812b6ab1fdd38d67992c8b78f9
