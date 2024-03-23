@@ -1,5 +1,5 @@
 <div class="outside-div">
-  <div *ngFor="let user of userInfo" class="user-info">
+  <div  class="user-info" *ngFor="let user of userInfo">
     <img src="../../assets/blank-profile.png">
     <p><strong>General Info:</strong></p>
     <p><strong>Name:</strong> {{ user.name }}</p>
@@ -7,7 +7,8 @@
     <p><strong>Gender:</strong> {{ user.gender }}</p>
     <button *ngIf="actualUser === user.id" mat-flat-button color="primary" (click)="openDialog()">Update</button>
   </div>
-  <div class="user-posts">
+  <div *ngIf="noPostDiv" class="user-posts no-post"><h3>No Post avaliable</h3></div>
+  <div class="user-posts" *ngIf="!noPostDiv">
     <mat-card *ngFor="let post of userPosts; index as i">
       <mat-card-header><strong>{{ post.title }}</strong></mat-card-header>
       <mat-divider></mat-divider>

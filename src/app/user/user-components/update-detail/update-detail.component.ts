@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { UsersListService } from '../../user-service/users-list.service';
 import { User } from '../../../models/User';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -10,16 +10,22 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './update-detail.component.css'
 })
 export class UpdateDetailComponent {
+  updateForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    gender: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required)
+  })
 
   constructor(private userService: UsersListService, public dialogRef: MatDialogRef<UpdateDetailComponent>){}
 
-  onSubmit(form: NgForm){
-    this.userService.setUpdate(form.value.email, form.value.name, form.value.gender, form.value.status).subscribe((data: User) =>
+  onSubmit(){
+    this.userService.setUpdate(this.updateForm.value.email, this.updateForm.value.name, this.updateForm.value.gender, this.updateForm.value.status).subscribe((data: User) =>
       {
         this.dialogRef.close()
-        
+        localStorage.setItem('user', JSON.stringify({id: data.id, email: data.email, name: data.name, gender: data.gender, status: data.status}))
       },
-      error => alert('email '+error.error[0].message)
+      error => alert(+error.error[0].message)
     )
   }
 

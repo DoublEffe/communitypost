@@ -15,11 +15,11 @@ export class UsersListService {
   }
 
   getUsersList(){
-    return this.http.get('https://gorest.co.in/public/v2/users?page=1&per_page='+this.pageNumber,{headers:{'Authorization': 'Bearer '+this.token}})
+    return this.http.get('https://gorest.co.in/public/v2/users?page=1&per_page='+this.pageNumber, {headers:{'Authorization': 'Bearer '+this.token}})
   }
 
   getAllUser(){
-    return this.http.get('https://gorest.co.in/public/v2/users?page=1&per_page=100')
+    return this.http.get('https://gorest.co.in/public/v2/users?page=1&per_page=100', {headers:{'Authorization': 'Bearer '+this.token}})
   }
 
   deleteUser(id: number){
@@ -28,6 +28,10 @@ export class UsersListService {
 
   getUserPosts(id: string){
     return this.http.get(`https://gorest.co.in/public/v2/users/${id}/posts`)
+  }
+
+  getDetail(id: number){
+    return this.http.get('https://gorest.co.in/public/v2/users/' + String(id), {headers:{'Authorization': 'Bearer '+this.token}})
   }
 
   setUpdate(email: string, name: string, gender: string, status: string){

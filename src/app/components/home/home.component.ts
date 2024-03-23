@@ -14,7 +14,6 @@ export class HomeComponent {
   constructor(private router: Router){
     
     this.router.events.subscribe((data: NavigationEnd)=> {
-      console.log(data.url)
       if(data.url !== undefined){
         this.activeLink=data.url
       }
@@ -24,7 +23,7 @@ export class HomeComponent {
   onLogout(){
     if(window.confirm('You are logging out. Are you sure?')){
       localStorage.removeItem('auth')
-      window.location.reload()  
+      //window.location.reload()  
     }
   }
   

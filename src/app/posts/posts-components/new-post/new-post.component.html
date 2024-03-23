@@ -1,17 +1,17 @@
-<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+<form [formGroup]="newpostForm" (ngSubmit)="onSubmit()">
   <mat-form-field >
     <mat-label>Title</mat-label>
-    <input matInput placeholder="Ex. " type="text" name="title" required ngModel>
+    <input matInput placeholder="Ex. " type="text" name="title" required formControlName="title">
   </mat-form-field>
   <mat-form-field class="textarea">
     <mat-label>Body</mat-label>
-    <textarea matInput placeholder="Ex. Fabio" type="text" name="body" required ngModel></textarea>
+    <textarea matInput placeholder="Ex. Fabio" type="text" name="body" required formControlName="body"></textarea>
   </mat-form-field>  
   <div class="buttons">
     <button mat-raised-button color="primary" (click)="onNoClick()" type="button">
       Dismiss
     </button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!newpostForm.valid">
       Create Post
     </button>
   </div>

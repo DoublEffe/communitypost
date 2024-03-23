@@ -1,14 +1,19 @@
 <div class="outside-div">
-  <div class="post-div">
+  
+  <div class="post-div" >
     <mat-card *ngFor="let post of post">
-      <mat-card-header><strong>{{ post.title }}</strong></mat-card-header> 
+      <mat-card-header>
+        <mat-card-title>
+          <strong>{{ post.title }}</strong>
+        </mat-card-title>
+      </mat-card-header> 
       <mat-divider ></mat-divider>
       <mat-card-content>{{ post.body }}</mat-card-content>
       <mat-card-actions>
         <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
           <mat-form-field class="textarea">
             <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Share your idea..." formControlName="comments" required></textarea>
+            <textarea matInput type="text" placeholder="Share your idea..." name="comments" formControlName="comments" required></textarea>
           </mat-form-field>
           <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
         </form>
@@ -16,8 +21,9 @@
     </mat-card>
   </div>
   
-    <div *ngFor="let comment of postComments" class="comments-div">
-      <p><strong>{{ comment.name }} </strong>said: {{ comment.body }}</p>
-    </div>
+  <div *ngIf="noCommentsDiv" class="no-comments"><h4>No comments available</h4></div>
+  <div *ngFor="let comment of postComments" class="comments-div" >
+    <p><strong>{{ comment.name }} </strong>said: {{ comment.body }}</p>
   </div>
+</div>
 

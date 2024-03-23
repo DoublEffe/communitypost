@@ -24,10 +24,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   ],
   imports: [
     HttpClientModule,
-    UserModule,
     BrowserModule,
-    PostsModule,
     AppRoutingModule,
+    UserModule,
+    PostsModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

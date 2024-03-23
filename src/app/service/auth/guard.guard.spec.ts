@@ -9,9 +9,15 @@ describe('guardGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
+    let store = {}
+    spyOn(window.localStorage, 'getItem').and.callFake((key:string) => store[key]||null )
+    spyOn(window.localStorage, 'setItem').and.callFake((key:string, value:string) => store[key] = value)
   });
 
   it('should be created', () => {
     expect(executeGuard).toBeTruthy();
   });
+
+ 
+
 });

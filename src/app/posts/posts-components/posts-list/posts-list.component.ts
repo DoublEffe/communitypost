@@ -3,7 +3,7 @@ import { PostsListService } from '../../posts-service/posts-list.service';
 import { Post } from '../../../models/Post';
 import { MatDialog } from '@angular/material/dialog';
 import { NewPostComponent } from '../new-post/new-post.component';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../service/auth/auth.service';
 
 
@@ -20,16 +20,19 @@ export class PostsListComponent implements OnInit {
   postListFiltered: Post[]
   showComment: boolean
   commentsForm = new FormGroup({
-    comments: new FormControl()
+    comments: new FormControl('', Validators.required)
   }) 
+  addButtonVisdible: boolean = false
 
   constructor(private postsService: PostsListService, private dialog: MatDialog){}
 
   ngOnInit(): void {
     this.postsService.getPostsList().subscribe((data: Post[]) => {
-      //console.log(data)
       this.postsList= data
     })
+    if(localStorage.getItem('user')){
+      this.addButtonVisdible = true
+    }
   }
 
   onFilter(event: Event){
@@ -38,10 +41,7 @@ export class PostsListComponent implements OnInit {
   }
 
   openDialog() {
-    if(!localStorage.getItem('user')){
-      alert('No user logged')
-      return
-    }
+    
     const dialogRef = this.dialog.open(NewPostComponent, {
       width: '400px',
       height: '500px'

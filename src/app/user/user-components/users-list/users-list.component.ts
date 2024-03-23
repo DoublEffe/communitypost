@@ -5,6 +5,7 @@ import { RegisterComponent } from '../register/register.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../service/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-list',
@@ -19,7 +20,7 @@ export class UsersListComponent implements OnInit{
   addButtonVisible: boolean 
   actualUserId: number
 
-  constructor(private usersService: UsersListService, private dialog: MatDialog, private auth: AuthService, private snackBar: MatSnackBar){ 
+  constructor(private usersService: UsersListService, private dialog: MatDialog, private auth: AuthService, private snackBar: MatSnackBar, private router: Router){ 
     this.pageSelected = this.usersService.pageNumber
   }
 

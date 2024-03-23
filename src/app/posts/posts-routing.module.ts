@@ -5,7 +5,7 @@ import { PostsCommentsComponent } from './posts-components/posts-comments/posts-
 
 const routes: Routes = [
   {path: '', component: PostsListComponent},
-  {path: 'posts/:id', component: PostsCommentsComponent},
+  {path: ':id', component: PostsCommentsComponent},
 ];
 
 @NgModule({

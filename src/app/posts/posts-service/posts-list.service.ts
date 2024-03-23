@@ -10,7 +10,7 @@ export class PostsListService {
   constructor(private http: HttpClient) { }
 
   getPostsList(){
-    return this.http.get('https://gorest.co.in/public/v2/posts', {headers:{'Authorization': 'Bearer '+this.token}})
+    return this.http.get('https://gorest.co.in/public/v2/posts?page=1&per_page=100', {headers:{'Authorization': 'Bearer '+this.token}})
   }
 
   getPostComments(id: string){

@@ -22,7 +22,7 @@
             <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
               <mat-form-field class="textarea">
                 <mat-label>Leave a comment</mat-label>
-                <textarea matInput placeholder="Share your idea..." formControlName="comments" required></textarea>
+                <textarea matInput type="text" name="comments" placeholder="Share your idea..." formControlName="comments" required></textarea>
               </mat-form-field>
               <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
             </form>
@@ -41,7 +41,7 @@
           <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
             <mat-form-field class="textarea">
               <mat-label>Leave a comment</mat-label>
-              <textarea matInput placeholder="Share your idea..." formControlName="comments" required></textarea>
+              <textarea matInput type="text" placeholder="Share your idea..." formControlName="comments" name="comments" required></textarea>
             </mat-form-field>
             <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
           </form>
@@ -50,7 +50,7 @@
     </ng-template>
   </div>
   <div class="button-div">
-    <button mat-fab extended color="primary" (click)="openDialog()" matTooltip="Add post">
+    <button mat-fab extended color="primary" (click)="openDialog()" matTooltip="Add post" *ngIf="addButtonVisdible">
       <mat-icon>add</mat-icon>
     </button>
   </div>

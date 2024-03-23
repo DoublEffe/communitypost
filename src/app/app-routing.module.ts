@@ -7,11 +7,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [guardGuard], children:[
+  {path: '', component: HomeComponent, canActivate:[guardGuard], children:[
     {path: 'posts', loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule)},
     {path: 'users', loadChildren: () => import('./user/user.module').then(m => m.UserModule)},
     {path: '', redirectTo: 'users', pathMatch: 'full'},
-  ]},
+ ]},
   {path: 'login', component: LoginComponent},
   {path: '**', component: NotFoundComponent},
 ];

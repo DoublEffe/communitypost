@@ -13,6 +13,12 @@
   border-radius: 50%;
 }
 
+.no-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .user-posts {
   width: 70%;
 }

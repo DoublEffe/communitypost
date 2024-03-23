@@ -25,6 +25,11 @@ form button {
   margin-left: 10px;
 }
 
+.no-comments {
+  position: relative;
+  top: 20px;
+}
+
 .comments-div {
   width: 50%;
   border: 2px solid grey;
