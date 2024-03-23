@@ -48,7 +48,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[CommunityPost Screen Shot](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20community.png)
+[CommunityPost Screen Shot](https://github.com/DoublEffe/communitypost/blob/main/Screenshot%20community.png)
 
 This project is meant to be a place for sharing ideas with your neighborhood and while you can just write a post about some ideas you have in your mind
 others can comment and in this way start a discussion on how your idea can be implemented in the reality.
