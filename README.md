@@ -48,7 +48,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[CommunityPost Screen Shot]()
+[CommunityPost Screen Shot](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20community.png)
 
 This project is meant to be a place for sharing ideas with your neighborhood and while you can just write a post about some ideas you have in your mind
 others can comment and in this way start a discussion on how your idea can be implemented in the reality.
@@ -108,19 +108,19 @@ List things you need to use the software and how to install them.
 
 This is the login page of CommunityPost and here you can insert the token obtained from the site gorest.co.in 
 
-[Login screen shoot]()
+[Login screen shoot](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot-login.png)
 
 After the login the main page will show two section called COMMUNITY, where you can see all users add your and filter trough them, and POSTS, where you can see all the posts from others.
 
-[main page]()
+[main page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20community.png)
 
 In the COMMUNITYpage you can click to a user and see the information about the user or modify them if is your user, also all posts made by the user can be seen here and is possible to make comments on them.
 
-[user detail page]()
+[user detail page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20userdetail.png)
 
 in the POSTS page you can make comments on each post or click the detail button to show the singol post with all comments.
 
-[posts page]()
+[posts page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20posts.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -140,7 +140,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Angular.io]: https://angular.io/
 [Angular-url]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-material]: https://img.shields.io/badge/Angular%20Material-8A2BE2
-<<<<<<< HEAD
 [Angular-material.io]: https://material.angular.io/
-=======
->>>>>>> 4b9b964ea2866e812b6ab1fdd38d67992c8b78f9
