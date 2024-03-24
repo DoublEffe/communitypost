@@ -112,15 +112,15 @@ This is the login page of CommunityPost and here you can insert the token obtain
 
 After the login the main page will show two section called COMMUNITY, where you can see all users add your and filter trough them, and POSTS, where you can see all the posts from others.
 
-[main page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20community.png)
+![main page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20community.png)
 
 In the COMMUNITYpage you can click to a user and see the information about the user or modify them if is your user, also all posts made by the user can be seen here and is possible to make comments on them.
 
-[user detail page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20userdetail.png)
+![user detail page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20userdetail.png)
 
 in the POSTS page you can make comments on each post or click the detail button to show the singol post with all comments.
 
-[posts page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20posts.png)
+![posts page](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20posts.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
