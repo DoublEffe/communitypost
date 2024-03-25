@@ -39,7 +39,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#license">License</a></li>
   </ol>
 </details>
 
@@ -48,7 +47,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![CommunityPost Screen Shot](https://github.com/DoublEffe/communitypost/blob/main/Screenshot%20community.png)
+![CommunityPost Screen Shot](https://github.com/DoublEffe/communitypost/blob/main/screenshoot/Screenshot%20community.png)
 
 This project is meant to be a place for sharing ideas with your neighborhood and while you can just write a post about some ideas you have in your mind
 others can comment and in this way start a discussion on how your idea can be implemented in the reality.
@@ -125,13 +124,6 @@ in the POSTS page you can make comments on each post or click the detail button 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
