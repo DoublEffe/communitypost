@@ -19,12 +19,12 @@
             <button mat-flat-button routerLink="/posts/{{ post.id }}" matTooltip="Show the comments">
               <mat-icon color="primary" class="icon-comments" >chat-bubble</mat-icon>
             </button>
-            <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
-              <mat-form-field class="textarea">
+            <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)" *ngIf="addButtonVisdible">
+              <mat-form-field class="textarea" >
                 <mat-label>Leave a comment</mat-label>
                 <textarea matInput type="text" name="comments" placeholder="Share your idea..." formControlName="comments" required></textarea>
               </mat-form-field>
-              <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
+              <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid" >Comment</button>
             </form>
           </mat-card-actions>  
         </mat-card>
@@ -38,12 +38,12 @@
           <button mat-flat-button routerLink="/posts/{{ post.id }}" matTooltip="Show the comments">
             <mat-icon color="primary" class="icon-comments" >chat-bubble</mat-icon>
           </button>
-          <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
+          <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)" *ngIf="addButtonVisdible">
             <mat-form-field class="textarea">
               <mat-label>Leave a comment</mat-label>
               <textarea matInput type="text" placeholder="Share your idea..." formControlName="comments" name="comments" required></textarea>
             </mat-form-field>
-            <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
+            <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid" >Comment</button>
           </form>
         </mat-card-actions>
       </mat-card>

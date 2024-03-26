@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PostsListService {
-  token: string = '55f8ed0796ca1a5ffc64baa13e552c669281b6b69e74b35d556286bb1101aec6'
+  token: string = JSON.parse(localStorage.getItem('auth')).token
 
   constructor(private http: HttpClient) { }
 
   getPostsList(){
-    return this.http.get('https://gorest.co.in/public/v2/posts?page=1&per_page=100', {headers:{'Authorization': 'Bearer '+this.token}})
+    return this.http.get('https://gorest.co.in/public/v2/posts?page=1&per_page=100', {headers:{'Authorization': 'Bearer '+ this.token}})
   }
 
   getPostComments(id: string){

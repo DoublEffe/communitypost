@@ -10,7 +10,7 @@
       <mat-divider ></mat-divider>
       <mat-card-content>{{ post.body }}</mat-card-content>
       <mat-card-actions>
-        <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
+        <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)" *ngIf="showCommentBox">
           <mat-form-field class="textarea">
             <mat-label>Leave a comment</mat-label>
             <textarea matInput type="text" placeholder="Share your idea..." name="comments" formControlName="comments" required></textarea>

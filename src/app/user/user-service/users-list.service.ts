@@ -7,7 +7,7 @@ import { User } from '../../models/User';
 })
 export class UsersListService {
   pageNumber: string = '10'
-  token: string='55f8ed0796ca1a5ffc64baa13e552c669281b6b69e74b35d556286bb1101aec6'
+  token: string = JSON.parse(localStorage.getItem('auth')).token
   constructor(private http: HttpClient) { }
 
   signUp(email: string, name: string, gender: string, status: string){

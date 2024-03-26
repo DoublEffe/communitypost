@@ -26,8 +26,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    UserModule,
-    PostsModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

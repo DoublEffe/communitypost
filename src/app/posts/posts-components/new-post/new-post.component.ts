@@ -23,7 +23,6 @@ export class NewPostComponent {
       {
         this.dialogRef.close()
         this.snackBar.open('Added post','', {duration: 3000})
-        console.log(data)
       }
     )
   }

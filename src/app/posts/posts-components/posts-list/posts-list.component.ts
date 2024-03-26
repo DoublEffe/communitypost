@@ -16,13 +16,12 @@ import { AuthService } from '../../../service/auth/auth.service';
   styleUrl: './posts-list.component.css'
 })
 export class PostsListComponent implements OnInit {
-  postsList: Post[]
-  postListFiltered: Post[]
-  showComment: boolean
+  postsList: Post[] //all post
+  postListFiltered: Post[] // post after filters
   commentsForm = new FormGroup({
     comments: new FormControl('', Validators.required)
   }) 
-  addButtonVisdible: boolean = false
+  addButtonVisdible: boolean = false // show/hide add post button and comment box
 
   constructor(private postsService: PostsListService, private dialog: MatDialog){}
 
@@ -30,6 +29,7 @@ export class PostsListComponent implements OnInit {
     this.postsService.getPostsList().subscribe((data: Post[]) => {
       this.postsList= data
     })
+    // show button to add post and comment box only if user exist
     if(localStorage.getItem('user')){
       this.addButtonVisdible = true
     }
@@ -49,9 +49,7 @@ export class PostsListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit()
-      console.log('The dialog was closed');
-      
+      this.ngOnInit() 
     });
   }
 

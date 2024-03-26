@@ -17,7 +17,7 @@
         <button mat-flat-button routerLink="/posts/{{ post.id }}" matTooltip="Show the comments">
           <mat-icon color="primary" class="icon-comments" >chat-bubble</mat-icon>
         </button>
-        <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)">
+        <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)" *ngIf="actualUser !== 0">
           <mat-form-field class="textarea">
             <mat-label>Leave a comment</mat-label>
             <textarea matInput placeholder="Share your idea..." type="textarea" formControlName="comments" required></textarea>

@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  activeLink: string 
+  activeLink: string // evidence the actual page on COMMUNITY/POSTS  bar
   
 
   constructor(private router: Router){
@@ -23,7 +23,7 @@ export class HomeComponent {
   onLogout(){
     if(window.confirm('You are logging out. Are you sure?')){
       localStorage.removeItem('auth')
-      //window.location.reload()  
+      window.location.reload()  
     }
   }
   

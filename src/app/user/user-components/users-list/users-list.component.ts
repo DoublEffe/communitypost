@@ -13,12 +13,12 @@ import { Router } from '@angular/router';
   styleUrl: './users-list.component.css'
 })
 export class UsersListComponent implements OnInit{
-  usersList: User[]
-  pageOption: number[] = [10, 20, 30, 40, 50, 60 ,70 ,80 , 90, 100]
-  pageSelected: string = this.usersService.pageNumber
-  usersFiltered: User[]
-  addButtonVisible: boolean 
-  actualUserId: number
+  usersList: User[] // first 10 user
+  pageOption: number[] = [10, 20, 30, 40, 50, 60 ,70 ,80 , 90, 100] // filter more user
+  pageSelected: string = this.usersService.pageNumber // current number of user showed
+  usersFiltered: User[] //user after filters
+  addButtonVisible: boolean // show/hide add user button 
+  actualUserId: number // show/hide delete button
 
   constructor(private usersService: UsersListService, private dialog: MatDialog, private auth: AuthService, private snackBar: MatSnackBar, private router: Router){ 
     this.pageSelected = this.usersService.pageNumber
@@ -30,10 +30,12 @@ export class UsersListComponent implements OnInit{
       const activeUsers: User[] = data.filter(user => user.status === 'active')
       this.usersList = activeUsers.concat(inactiveUsers) 
     })    
+    // check if user exist and show add user button and hide delete button
     if(!localStorage.getItem('user')){
       this.actualUserId = 0
       this.addButtonVisible = true
     }
+    // show delete button if user exist only in the current user box
     else{
       this.actualUserId = JSON.parse(localStorage.getItem('user')).id
     }
@@ -61,6 +63,7 @@ export class UsersListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      // hide ad user button, make sure that user data is in localstorage
       if(result){
         this.addButtonVisible = false
         this.auth.storageObs.subscribe({

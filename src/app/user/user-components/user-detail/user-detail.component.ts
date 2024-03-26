@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpdateDetailComponent } from '../update-detail/update-detail.component';
+import { PostsListService } from '../../../posts/posts-service/posts-list.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,15 +15,15 @@ import { UpdateDetailComponent } from '../update-detail/update-detail.component'
   styleUrl: './user-detail.component.css'
 })
 export class UserDetailComponent implements OnInit{
-  userInfo: User[]
+  userInfo: User[] 
   userPosts: Post[]
   commentsForm = new FormGroup({
     comments: new FormControl('', Validators.required)
   })
-  actualUser: number
-  noPostDiv: boolean = false
+  actualUser: number // user deatil page is/isn't the user logged
+  noPostDiv: boolean = false // user has/has not post
 
-  constructor(private userService: UsersListService, private route: ActivatedRoute, private dialog: MatDialog, private snackBar: MatSnackBar){}
+  constructor(private userService: UsersListService, private postService: PostsListService , private route: ActivatedRoute, private dialog: MatDialog, private snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id']
@@ -32,12 +33,13 @@ export class UserDetailComponent implements OnInit{
     )
 
     this.userService.getUserPosts(id).subscribe((data: Post[]) => 
-      {
+      { // check if current user has post and update noPostDiv
         if(data.length === 0){
           this.noPostDiv = true
         }
         this.userPosts = data}
     )
+    // check the user and update actualUser to show update button info
     if(!localStorage.getItem('user')){
       this.actualUser = 0
     }
@@ -61,7 +63,7 @@ export class UserDetailComponent implements OnInit{
   }
 
   onComments(id: number){
-
+    this.postService.makeNewComment(id, this.commentsForm.value.comments).subscribe(data => this.ngOnInit())
   }
 
  

@@ -17,7 +17,8 @@ export class PostsCommentsComponent implements OnInit{
   commentsForm = new FormGroup({
     comments: new FormControl('', Validators.required)
   })
-  noCommentsDiv: boolean = false
+  noCommentsDiv: boolean = false // show/hide div element
+  showCommentBox: boolean = false // show/hide comment box
 
   constructor(private postService: PostsListService, private route: ActivatedRoute){}
 
@@ -28,13 +29,17 @@ export class PostsCommentsComponent implements OnInit{
     )
       
     this.postService.getPostComments(postId).subscribe((data: Comment[]) => 
-        {
+        { //checj if there are not comments and show a different div element
           if(data.length === 0){
             this.noCommentsDiv = true
           }
           this.postComments = data.filter(comment => comment.post_id === Number(postId))
         }
       )
+      // check user exist and show comment box
+      if(localStorage.getItem('user')){
+        this.showCommentBox = true
+      }
   }
 
   onComments(id: number){
