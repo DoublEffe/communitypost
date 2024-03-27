@@ -23,7 +23,7 @@ export class HomeComponent {
   onLogout(){
     if(window.confirm('You are logging out. Are you sure?')){
       localStorage.removeItem('auth')
-      window.location.reload()  
+      //window.location.reload()  
     }
   }
   

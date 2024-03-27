@@ -17,6 +17,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UpdateDetailComponent } from '../update-detail/update-detail.component';
 import {MatSnackBarHarness} from '@angular/material/snack-bar/testing';
+import { PostsListService } from '../../../posts/posts-service/posts-list.service';
 class MatDialogMock {
   open = jasmine.createSpy().and.returnValue({
     afterClosed: () => of(),
@@ -68,7 +69,7 @@ describe('UserDetailComponent', () => {
     }
     await TestBed.configureTestingModule({
       declarations: [UserDetailComponent],
-      providers: [{provide: UsersListService, useValue: userServiceStub}, {provide: ActivatedRoute, useValue: {snapshot: {params: '0'}}}, ],
+      providers: [{provide: UsersListService, useValue: userServiceStub}, {provide: PostsListService, useValue: postsServiceSpy}, {provide: ActivatedRoute, useValue: {snapshot: {params: '0'}}}, ],
       imports: [AngularMaterialModule, RouterTestingModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule,]
     })
     .compileComponents();
@@ -122,23 +123,27 @@ describe('UserDetailComponent', () => {
     expect(component.noPostDiv).toBeTruthy()
 */
   })
-  /*
+  
   it('comment button should not be avilable without text', async() => {
+    component.actualUser = 1
+    fixture.detectChanges()
     const input = await loader.getHarness(MatInputHarness)
     const button= await loader.getAllHarnesses(MatButtonHarness)
     expect(await input.isRequired()).toBeTruthy()
-    expect(await button[1].isDisabled()).toBeTruthy()
+    expect(await button[2].isDisabled()).toBeTruthy()
   })
 
   it('should post comment', async() => {
+    component.actualUser = 1
+    fixture.detectChanges()
     const input = await loader.getHarness(MatInputHarness)
     await input.setValue('test comment')
     fixture.detectChanges()
     const button= await loader.getAllHarnesses(MatButtonHarness)
-    expect(await button[1].isDisabled()).toBeFalsy()
+    expect(await button[2].isDisabled()).toBeFalsy()
     fixture.detectChanges()
     
-  })*/
+  })
 
   it('should display user info', () => {
     const postdiv = fixture.debugElement.queryAll(By.css('.user-info p'))

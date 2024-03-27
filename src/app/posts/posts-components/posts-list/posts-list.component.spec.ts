@@ -73,7 +73,10 @@ describe('PostsListComponent', () => {
     cards.map((card,i) => expect(component.postsList[i].title).toEqual(title[i]))
   })
 
+
   it('comment button should not be avilable without text', async() => {
+    component.addButtonVisdible = true
+    fixture.detectChanges()
     const input = await loader.getHarness(MatInputHarness.with({placeholder: 'Share your idea...'}))
     const button= await loader.getHarness(MatButtonHarness.with({text: 'Comment'}))
     expect( await input.isRequired()).toBeTruthy()
@@ -82,6 +85,8 @@ describe('PostsListComponent', () => {
 
   it('should post a comment', async() => {
     postsServiceStub.getPostsList().subscribe((data: [] )=> component.postsList = data)
+    component.addButtonVisdible = true
+    fixture.detectChanges()
     const input = await loader.getHarness(MatInputHarness.with({placeholder: 'Share your idea...'}))
     await input.setValue('test comment')
     fixture.detectChanges()

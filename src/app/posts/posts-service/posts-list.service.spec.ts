@@ -2,20 +2,22 @@ import { TestBed } from '@angular/core/testing';
 
 import { PostsListService } from './posts-list.service';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+
 
 describe('PostsListService', () => {
   let service: PostsListService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let headers: {}
+  let getItemSpy: jasmine.Spy;
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
-    service = new PostsListService(httpClientSpy);
     let store = {}
-    spyOn(window.localStorage, 'getItem').and.callFake((key:string) => store[key]||null )
     spyOn(window.localStorage, 'setItem').and.callFake((key:string, value:string) => store[key] = value)
+    getItemSpy = spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify({ token: 'testToken' }));
+    service = new PostsListService(httpClientSpy);
     localStorage.setItem('token', 'token fake')
     service.token = localStorage.getItem('token')
     headers = {headers:{'Authorization': 'Bearer '+service.token}}
