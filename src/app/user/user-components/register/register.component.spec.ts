@@ -1,11 +1,11 @@
+// Import necessari per il test
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegisterComponent } from './register.component';
 import { UsersListService } from '../../user-service/users-list.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, of } from 'rxjs';
 import { AuthService } from '../../../service/auth/auth.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../../../materialdesign/angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -14,9 +14,10 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import {MatSelectHarness} from '@angular/material/select/testing';
 import { UsersListComponent } from '../users-list/users-list.component';
-import { input } from '@angular/core';
+
 
 describe('RegisterComponent', () => {
+  // Dichiarazione delle variabili necessarie
   let userServiceStub: Partial<UsersListService>
   let authServiceStub: Partial<AuthService>
   let dialogRefStub: Partial<MatDialogRef<UsersListComponent>>
@@ -71,43 +72,63 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('button should be disabled without input', async() => {
-    expect(await inputs[0].isRequired()).toBeTruthy()
-    expect(await inputs[1].isRequired()).toBeTruthy()
-    expect(await select.isRequired()).toBeTruthy()
-    expect(await buttons[1].isDisabled()).toBeTruthy()
-  })
-
-  it('button should be enable with input', async() => {  
-    await inputs[0].setValue('test email')
-    await inputs[1].setValue('test name')
-    await select.clickOptions()
-    expect(await buttons[1].isDisabled()).toBe(false)
-  })
-
-  it('should send new post to the service', async() => {
-    await inputs[0].setValue('testemail')
-    await inputs[1].setValue('test name') 
-    await select.clickOptions() 
-    fixture.detectChanges()
-    const formValues = {
-      email: await inputs[0].getValue(),
-      name: await inputs[1].getValue(),
-      gender: 'Male',
-      status: 'active'
-    }
+  describe('button should be disabled without input', () => {
     
-    
-    spyOn(userServiceStub, 'signUp').and.callThrough()
-    component.onSubmit()
-    expect(userServiceStub.signUp).toHaveBeenCalledWith( formValues.email, formValues.name, formValues.gender, formValues.status )  
-  })
+    it('should have required fields', async () => {
+      expect(await inputs[0].isRequired()).toBeTruthy();
+      expect(await inputs[1].isRequired()).toBeTruthy();
+      expect(await select.isRequired()).toBeTruthy();
+    });
 
-  it('should close dialog', async() => {
-    await buttons[0].click()
-    component.onNoClick()
-    expect(dialogRefSpy.close).toHaveBeenCalled()
-  })
+    it('should disable submit button', async () => {
+      expect(await buttons[1].isDisabled()).toBeTruthy();
+    });
+  });
 
+  describe('button should be enabled with input', () => {
+    beforeEach(async () => {
+      // Simula l'immissione di input nei campi prima di ogni test
+      await inputs[0].setValue('test email');
+      await inputs[1].setValue('test name');
+      await select.clickOptions();
+    });
 
+    it('should enable submit button', async () => {
+      expect(await buttons[1].isDisabled()).toBe(false);
+    });
+  });
+
+  describe('should send new post to the service', () => {
+    beforeEach(async () => {
+      // Simula l'immissione di dati nei campi prima di ogni test
+      await inputs[0].setValue('testemail');
+      await inputs[1].setValue('test name');
+      await select.clickOptions();
+      fixture.detectChanges();
+    });
+
+    it('should call signUp method with form values', () => {
+      // Ottiene i valori inseriti nel form
+      const formValues = {
+        email: 'testemail',
+        name: 'test name',
+        gender: 'Male',
+        status: 'active'
+      };
+      // Simula l'invio del form e verifica che i dati siano stati inviati al servizio
+      spyOn(userServiceStub, 'signUp').and.callThrough();
+      component.onSubmit();
+      expect(userServiceStub.signUp).toHaveBeenCalledWith(formValues.email, formValues.name, formValues.gender, formValues.status);
+    });
+  });
+
+  describe('should close dialog', () => {
+    it('should call close method of MatDialogRef', async () => {
+      // Simula il clic sul pulsante di chiusura
+      await buttons[0].click();
+      component.onNoClick();
+      // Verifica che il metodo close del MatDialogRef sia stato chiamato
+      expect(dialogRefSpy.close).toHaveBeenCalled();
+    });
+  });
 });

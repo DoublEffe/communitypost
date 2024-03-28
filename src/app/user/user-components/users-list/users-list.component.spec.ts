@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UsersListComponent } from './users-list.component';
 import { UsersListService } from '../../user-service/users-list.service';
 import { of } from 'rxjs';
@@ -9,7 +8,6 @@ import { AngularMaterialModule } from '../../../materialdesign/angular-material.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import {MatListItemHarness, MatSubheaderHarness} from '@angular/material/list/testing';
 import { By } from '@angular/platform-browser';
 
 describe('UsersListComponent', () => {

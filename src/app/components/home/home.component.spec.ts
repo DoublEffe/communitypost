@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+// Import necessari per il test
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { AngularMaterialModule } from '../../materialdesign/angular-material.module';
 import { RouterTestingHarness } from '@angular/router/testing';
@@ -10,58 +10,77 @@ import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-
 describe('HomeComponent', () => {
+  // Dichiarazione delle variabili necessarie
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let harness: RouterTestingHarness
+  let harness: RouterTestingHarness;
   let loader: HarnessLoader;
   const eventSubject = new ReplaySubject<RouterEvent>(1);
+
+  // Mock del router
   const routerMock = {
     events: eventSubject.asObservable(),
-  }
+    navigate: jasmine.createSpy('navigate').and.returnValue(Promise.resolve(true)), // Lo spy per il metodo navigate
+  };
 
+  // Configurazione del modulo di test
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      providers: [{provide: Router, useValue: routerMock}],
+      providers: [{ provide: Router, useValue: routerMock }], // Fornisce il mock del router come provider
       imports: [AngularMaterialModule],
       schemas: [NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
+    // Creazione del componente e inizializzazione delle variabili
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    loader = TestbedHarnessEnvironment.loader(fixture)
-    eventSubject.next(new NavigationEnd(1, '/users', '/urlAfterRedirect'))
+    loader = TestbedHarnessEnvironment.loader(fixture);
+    eventSubject.next(new NavigationEnd(1, '/users', '/urlAfterRedirect'));
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  // Blocchi describe per organizzare i test
+  describe('Component Creation', () => {
+    // Test per verificare la creazione del componente
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-  it('should be on users page by default',() => {
-    expect(component.activeLink).toEqual('/users')
-  })
+  describe('Default Active Link', () => {
+    // Test per verificare il link attivo predefinito
+    it('should be on users page by default', () => {
+      expect(component.activeLink).toEqual('/users');
+    });
+  });
 
-  it('should navigate to posts', async () => {
-    const tabs = await loader.getHarness(MatTabNavBarHarness)
-    const postsLink = await tabs.getLinks()
-    await postsLink[1].click()
-    expect(component.activeLink).toEqual('/posts')
-  })
+  describe('Navigation', () => {
+    // Test per verificare la navigazione verso la pagina '/posts'
+    it('should navigate to posts', async () => {
+      const tabs = await loader.getHarness(MatTabNavBarHarness); // Ottiene il MatTabNavBarHarness
+      const postsLink = await tabs.getLinks(); // Ottiene i link all'interno del tab bar
+      await postsLink[1].click(); // Simula il click sul secondo link (assumendo che sia il link per 'posts')
+      expect(component.activeLink).toEqual('/posts'); // Verifica che il link attivo sia '/posts'
+    });
+  });
 
-  it('should logout', () => {
-    let store = {}
-    spyOn(window.localStorage, 'getItem').and.callFake((key:string) => store[key]||null )
-    spyOn(window.localStorage, 'removeItem').and.callFake((key:string) => store[key]=null )
-    spyOn(window, 'confirm').and.returnValue(true);
-    component.onLogout()
-    localStorage.removeItem('user')
-    expect(localStorage.removeItem).toHaveBeenCalled()
-  })
-
-  
+  describe('Logout', () => {
+    // Test per verificare la funzione di logout
+    it('should logout', fakeAsync(() => {
+      // Simula localStorage.getItem() restituendo un token
+      spyOn(window.localStorage, 'getItem').and.returnValue('token');
+      // Simula localStorage.removeItem()
+      spyOn(window.localStorage, 'removeItem');
+      // Simula la conferma dell'utente per il logout
+      spyOn(window, 'confirm').and.returnValue(true);
+      // Chiama la funzione di logout
+      component.onLogout();
+      tick(); // Simula il passare del tempo
+      // Verifica che localStorage.removeItem() sia stato chiamato
+      expect(localStorage.removeItem).toHaveBeenCalled();
+    }));
+  });
 });
+
