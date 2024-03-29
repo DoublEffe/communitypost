@@ -3,6 +3,7 @@ import { User } from '../../../models/User';
 import { UsersListService } from '../../user-service/users-list.service';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../../../models/Post';
+import { Comment } from '../../../models/Comment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,6 +18,7 @@ import { PostsListService } from '../../../posts/posts-service/posts-list.servic
 export class UserDetailComponent implements OnInit{
   userInfo: User[] 
   userPosts: Post[]
+  postsComments: Comment[]
   commentsForm = new FormGroup({
     comments: new FormControl('', Validators.required)
   })
@@ -37,7 +39,12 @@ export class UserDetailComponent implements OnInit{
         if(data.length === 0){
           this.noPostDiv = true
         }
-        this.userPosts = data}
+        this.userPosts = data
+        data.map(post => 
+          this.postService.getPostComments(String(post.id)).subscribe((data: Comment[]) => 
+              this.postsComments = data
+            ))
+      }
     )
     // check the user and update actualUser to show update button info
     if(!localStorage.getItem('user')){
@@ -46,6 +53,7 @@ export class UserDetailComponent implements OnInit{
     else{
       this.actualUser = JSON.parse(localStorage.getItem('user')).id
     }
+
   }
 
   openDialog(): void {

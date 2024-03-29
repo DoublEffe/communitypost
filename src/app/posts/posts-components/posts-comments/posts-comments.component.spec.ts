@@ -26,9 +26,9 @@ describe('PostsCommentsComponent', () => {
 
   // Configurazione del modulo di test
   beforeEach(async () => {
-    postsServiceSpy = jasmine.createSpyObj('PostsListService', ['makeNewComment', 'getPostsList', 'getPostComments'])
+    postsServiceSpy = jasmine.createSpyObj('PostsListService', ['makeNewComment', 'getPost', 'getPostComments'])
     postsServiceStub = {
-      getPostsList() {
+      getPost(id) {
         return  of([{
           id: 0,
           email: 'test@test.it',
@@ -90,7 +90,7 @@ describe('Inizialization', () => {
     }]
 
     // Controllo dell'inizializzazione del post e dei commenti
-    postsServiceStub.getPostsList().subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
+    postsServiceStub.getPost('0').subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
     expect(component.post).toEqual(post)
     postsServiceStub.getPostComments('0').subscribe((data: [] )=> component.postComments = data.filter((comment: any) => comment.post_id === 0))
     expect(component.postComments).toEqual(comment)
@@ -131,7 +131,7 @@ describe('Comment Box', () => {
     fixture.detectChanges()
 
     // Controllo che il campo di input sia obbligatorio e che il button sia disabilitato
-    postsServiceStub.getPostsList().subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
+    postsServiceStub.getPost('0').subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
     const input = await loader.getHarness(MatInputHarness)
     const button= await loader.getHarness(MatButtonHarness)
     expect(await input.isRequired()).toBeTruthy()
@@ -156,7 +156,7 @@ describe('Comment Box', () => {
       body: 'test body comment'
     }]
     // Controllo che il box commento non sia disponibile inizialmente
-    postsServiceStub.getPostsList().subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
+    postsServiceStub.getPost('0').subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
     expect(component.post).toEqual(post)
     postsServiceStub.getPostComments('0').subscribe((data: [] )=> component.postComments = data.filter((comment: any) => comment.post_id === 0))
     expect(component.postComments).toEqual(comment)
@@ -197,7 +197,7 @@ describe('Comment Box', () => {
     localStorage.setItem('user', JSON.stringify({name:'test',email:'test'}))
 
     // Controllo che il box commento sia visibile
-    postsServiceStub.getPostsList().subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
+    postsServiceStub.getPost('0').subscribe((data: [] )=> component.post = data.filter((post: any) => post.id === 0))
     expect(component.post).toEqual(post)
     postsServiceStub.getPostComments('0').subscribe((data: [] )=> component.postComments = data.filter((comment: any) => comment.post_id === 0))
     expect(component.postComments).toEqual(comment)

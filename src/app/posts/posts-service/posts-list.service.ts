@@ -13,6 +13,10 @@ export class PostsListService {
     return this.http.get('https://gorest.co.in/public/v2/posts?page=1&per_page=100', {headers:{'Authorization': 'Bearer '+ this.token}})
   }
 
+  getPost(id: string){
+    return this.http.get(`https://gorest.co.in//public/v2/posts/${id}`, {headers:{'Authorization': 'Bearer '+ this.token}})
+  }
+
   getPostComments(id: string){
     return this.http.get(`https://gorest.co.in/public/v2/posts/${id}/comments`, {headers:{'Authorization': 'Bearer '+this.token}})
   } 

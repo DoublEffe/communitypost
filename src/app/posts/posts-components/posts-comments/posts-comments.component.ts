@@ -24,8 +24,8 @@ export class PostsCommentsComponent implements OnInit{
 
   ngOnInit(): void {
     const postId = this.route.snapshot.params['id']
-    this.postService.getPostsList().subscribe( (data: Post[]) =>  
-      this.post = data.filter(post => post.id === Number(postId)) 
+    this.postService.getPost(postId).subscribe( (data: Post) =>  
+      this.post = [data]
     )
       
     this.postService.getPostComments(postId).subscribe((data: Comment[]) => 

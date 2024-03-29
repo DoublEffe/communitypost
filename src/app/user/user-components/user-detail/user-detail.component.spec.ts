@@ -21,16 +21,31 @@ describe('UserDetailComponent', () => {
   let component: UserDetailComponent;
   let fixture: ComponentFixture<UserDetailComponent>;
   let userServiceStub: Partial<UsersListService>
+  let postServiceStub: Partial<PostsListService>
   let routeStub: ActivatedRoute
   let loader: HarnessLoader
   let dialogRefSpy: jasmine.SpyObj<MatDialogRef<UpdateDetailComponent>>
-  let postsServiceSpy: jasmine.SpyObj<UsersListService>
+  let postsServiceSpy: jasmine.SpyObj<PostsListService>
+  let userServiceSpy: jasmine.SpyObj<UsersListService>
   let dialogSpy: MatDialog
 
 
   beforeEach(async () => {
     dialogRefSpy = jasmine.createSpyObj('MatDialogRef',['afterClosed'] )
-    postsServiceSpy = jasmine.createSpyObj('UsersListService', ['makeNewComment', 'getPostsList', 'getUserPosts'])
+    postsServiceSpy = jasmine.createSpyObj('PostsListService', ['makeNewComment', 'getPostsList', 'getUserPosts', 'getPostComments'])
+    userServiceSpy = jasmine.createSpyObj('UsersListService', ['getUsersList', 'getAllUser', 'getUserPosts', 'getPostComments'])
+    
+    postServiceStub = {
+      getPostComments(id) {
+          return of([{
+            id: 0,
+            post_id: 0,
+            name: 'test name',
+            email: 'test email',
+            body: 'test body comment'
+          }])
+      },
+    }
 
     userServiceStub = {
       getUsersList() {
@@ -49,7 +64,8 @@ describe('UserDetailComponent', () => {
           name: 'test',
           gender: 'male',
           status: 'active'
-        }],)
+        }],
+        )
       },
       getUserPosts(id) {
           return of([{
@@ -61,7 +77,7 @@ describe('UserDetailComponent', () => {
     }
     await TestBed.configureTestingModule({
       declarations: [UserDetailComponent],
-      providers: [{provide: UsersListService, useValue: userServiceStub}, {provide: PostsListService, useValue: postsServiceSpy}, {provide: ActivatedRoute, useValue: {snapshot: {params: '0'}}}, ],
+      providers: [{provide: UsersListService, useValue: userServiceStub}, {provide: PostsListService, useValue: postServiceStub}, {provide: ActivatedRoute, useValue: {snapshot: {params: '0'}}}, ],
       imports: [AngularMaterialModule, RouterTestingModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule,]
     })
     .compileComponents();
@@ -73,6 +89,15 @@ describe('UserDetailComponent', () => {
     
     fixture.detectChanges();
     userServiceStub.getAllUser().subscribe((data:[]) => component.userInfo = data.filter((user: any) => user.id === 1))
+    userServiceStub.getUserPosts('0').subscribe((data:[]) => data.map(post =>  postServiceStub.getPostComments('0').subscribe((data: any) => component.postsComments= data)))
+    userServiceSpy.getAllUser.and.returnValue(of([{
+      id: 1,
+      email: 'test@test.it',
+      name: 'test',
+      gender: 'male',
+      status: 'active'
+    }],
+    ))
     fixture.detectChanges();
     let store = {}
     spyOn(window.localStorage, 'getItem').and.callFake((key:string) => store[key]||null )
@@ -97,7 +122,7 @@ describe('UserDetailComponent', () => {
   
   it('shoul display no post if there are not', async() => {
     spyOn(userServiceStub, 'getUserPosts').and.callFake(()=>of([]))
-
+    
     component.ngOnInit()
     expect(component.noPostDiv).toBeTruthy()
     const postdiv = fixture.debugElement.query(By.css('.user-posts h3'))
@@ -135,23 +160,14 @@ describe('UserDetailComponent', () => {
 
   it('should diplay update button only when actual user', async() => {
     const postdiv = fixture.debugElement.query(By.css('.user-info button'))
-
     expect(localStorage.getItem('user')).toBeNull()
-    expect(component.actualUser).toBeFalsy()
-    
+    expect(component.actualUser).toBeFalsy() 
     expect(component.actualUser).toBe(0)
     expect(postdiv).toBeNull()
-    
-    
     localStorage.setItem('user', '1')
     component.actualUser = Number(localStorage.getItem('user'))
     component.ngOnInit()
     fixture.detectChanges()
-    
-    expect(postdiv).toBeDefined()
-    
-  })
-  
-
-  
+    expect(postdiv).toBeDefined() 
+  }) 
 });

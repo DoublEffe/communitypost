@@ -27,7 +27,7 @@ export class UsersListService {
   }
 
   getUserPosts(id: string){
-    return this.http.get(`https://gorest.co.in/public/v2/users/${id}/posts`)
+    return this.http.get(`https://gorest.co.in/public/v2/users/${id}/posts`, {headers:{'Authorization': 'Bearer '+this.token}})
   }
 
   getDetail(id: number){
