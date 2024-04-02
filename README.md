@@ -93,7 +93,11 @@ List things you need to use the software and how to install them.
    ```
 2. Get the token from gorest.co.in
   [Get-Token](https://gorest.co.in/consumer/login)
-3. Run the project in local
+3. Run npm install to install all necesssary packages
+   ```sh
+   npm install
+   ```
+4. Run the project in local
    ```sh
    ng serve
    ```
