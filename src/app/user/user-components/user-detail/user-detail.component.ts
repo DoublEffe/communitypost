@@ -19,9 +19,7 @@ export class UserDetailComponent implements OnInit{
   userInfo: User[] 
   userPosts: Post[]
   postsComments: Comment[]
-  commentsForm = new FormGroup({
-    comments: new FormControl('', Validators.required)
-  })
+  commentFormGroups: { [key: string]: FormGroup } = {}
   actualUser: number // user deatil page is/isn't the user logged
   noPostDiv: boolean = false // user has/has not post
 
@@ -40,6 +38,11 @@ export class UserDetailComponent implements OnInit{
           this.noPostDiv = true
         }
         this.userPosts = data
+        this.userPosts.forEach(post => {
+          this.commentFormGroups[post.id.toString()] = new FormGroup({
+            comments: new FormControl('', Validators.required)
+          })
+        }) 
         data.map(post => 
           this.postService.getPostComments(String(post.id)).subscribe((data: Comment[]) => 
               this.postsComments = data
@@ -71,7 +74,7 @@ export class UserDetailComponent implements OnInit{
   }
 
   onComments(id: number){
-    this.postService.makeNewComment(id, this.commentsForm.value.comments).subscribe(data => this.ngOnInit())
+    this.postService.makeNewComment(id, this.commentFormGroups[String(id)].value.comments).subscribe(data => this.ngOnInit())
   }
 
  

@@ -23,6 +23,7 @@ export class HomeComponent {
   onLogout(){
     if(window.confirm('You are logging out. Are you sure?')){
       localStorage.removeItem('auth')
+      localStorage.removeItem('user')
       this.router.navigate(['/login']) 
     }
   }

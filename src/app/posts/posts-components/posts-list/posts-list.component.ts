@@ -18,9 +18,7 @@ import { AuthService } from '../../../service/auth/auth.service';
 export class PostsListComponent implements OnInit {
   postsList: Post[] //all post
   postListFiltered: Post[] // post after filters
-  commentsForm = new FormGroup({
-    comments: new FormControl('', Validators.required)
-  }) 
+  commentFormGroups: { [key: string]: FormGroup } = {}
   addButtonVisdible: boolean = false // show/hide add post button and comment box
 
   constructor(private postsService: PostsListService, private dialog: MatDialog){}
@@ -28,11 +26,17 @@ export class PostsListComponent implements OnInit {
   ngOnInit(): void {
     this.postsService.getPostsList().subscribe((data: Post[]) => {
       this.postsList= data
+      this.postsList.forEach(post => {
+        this.commentFormGroups[post.id.toString()] = new FormGroup({
+          comments: new FormControl('', Validators.required)
+        })
+      })
     })
     // show button to add post and comment box only if user exist
     if(localStorage.getItem('user')){
       this.addButtonVisdible = true
     }
+
   }
 
   onFilter(event: Event){
@@ -53,8 +57,11 @@ export class PostsListComponent implements OnInit {
     });
   }
 
-  onComments(post_id: number){
-    this.postsService.makeNewComment(post_id, this.commentsForm.value.comments).subscribe(data => this.ngOnInit())
+  onComments(post_id: number){ 
+    this.postsService.makeNewComment(post_id, this.commentFormGroups[String(post_id)].value.comments).subscribe(data => {
+      this.commentFormGroups[String(post_id)].value.comments = ''
+      this.ngOnInit()
+    })
   }
 
 }

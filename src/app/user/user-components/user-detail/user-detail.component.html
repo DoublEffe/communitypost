@@ -17,12 +17,12 @@
         <button mat-flat-button routerLink="/posts/{{ post.id }}" matTooltip="Show the comments">
           <mat-icon color="primary" class="icon-comments" >chat-bubble</mat-icon>
         </button>
-        <form [formGroup]="commentsForm" (ngSubmit)="onComments(post.id)" *ngIf="actualUser !== 0">
+        <form [formGroup]="commentFormGroups[post.id]" (ngSubmit)="onComments(post.id)" *ngIf="actualUser !== 0">
           <mat-form-field class="textarea">
             <mat-label>Leave a comment</mat-label>
             <textarea matInput placeholder="Share your idea..." type="textarea" formControlName="comments" required></textarea>
           </mat-form-field>
-          <button mat-raised-button type="submit" color="primary" [disabled]="!commentsForm.valid">Comment</button>
+          <button mat-raised-button type="submit" color="primary" [disabled]="!commentFormGroups[post.id].valid">Comment</button>
         </form>
       </mat-card-actions>  
         <div *ngFor="let comment of postsComments" >
