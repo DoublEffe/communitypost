@@ -13,6 +13,8 @@
     <a href="https://github.com/DoublEffe/communitypost"><strong>Explore the docs »</strong></a>
     <br />
     <br />
+    <a href="https://communitypost-8cda6.web.app/login">View Demo</a>
+    ·
     <a href="https://github.com/DoublEffe/communitypost/issues">Report Bug</a>
     ·
     <a href="https://github.com/DoublEffe/communitypost/issues">Request Feature</a>
